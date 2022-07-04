@@ -2,7 +2,7 @@ GCC = gcc
 GCCFLAGS = -lglut -lGLU -lGL -lm
 
 PROG = groupf
-PROGOBJ = score.o result.o game.o game_client.o
+PROGOBJ = score.o result.o timelimit.o game.o game_client.o
 
 $(PROG): $(PROGOBJ)
 	$(GCC) -o $@ $(PROGOBJ) $(GCCFLAGS)

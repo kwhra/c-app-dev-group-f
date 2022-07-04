@@ -1,5 +1,6 @@
 #include <math.h>
 #include <GL/glut.h>
+#include "hit.h"
 #include "object_location.h"
 
 // let 0 is player
