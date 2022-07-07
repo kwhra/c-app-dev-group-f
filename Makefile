@@ -1,17 +1,35 @@
 GCC = gcc
-GCCFLAGS = -lglut -lGLU -lGL -lm
+BUILDFLAG = -lglut -lGLU -lGL -lm
+DEPFLAG = 
 
 PROG = groupf
-PROGOBJ = score.o result.o timelimit.o game.o game_client.o
+PROGSRC = score.c result.c timelimit.c objects.c game.c game_client.c
+PROGOBJ = $(PROGSRC:%.c=%.o)
+PROGDEP = $(PROGSRC:%.c=%.d)
+
+MOVE = move
+MOVESRC = carrot.c diamond.c objects.c objects_draw.c objects_move.c
+MOVEOBJ = $(MOVESRC:%.c=%.o)
+MOVEDEP = $(MOVESRC:%.c=%.d)
+
+PROGS = $(PROG) $(MOVE)
+OBJS = $(PROGOBJ) $(MOVEOBJ)
+DEPS = $(PROGDEP) $(MOVEDEP)
 
 $(PROG): $(PROGOBJ)
-	$(GCC) -o $@ $(PROGOBJ) $(GCCFLAGS)
+	$(GCC) -o $@ $(PROGOBJ) $(BUILDFLAG)
 
-.SUFFIXES: .c .o
+$(MOVE): $(MOVEOBJ)
+	$(GCC) -o $@ $(MOVEOBJ) $(BUILDFLAG)
 
-.c.o:
-	$(GCC) $(GCCFLAGS) -c $<
+%.o: %.c
+	${GCC} $< -MM -MP -MF $*.d
+	${GCC} -c $< -o $@
 
+ifeq ($(findstring clean,${MAKECMDGOALS}),)
+-include ${DEPS}
+endif
+
+.PHONY: clean
 clean:
-	rm -f $(PROG)
-	rm -f *.o
+	rm -f $(PROGS) $(OBJS) $(DEPS)
