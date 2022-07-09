@@ -1,10 +1,11 @@
 #include <GL/glut.h>
 #include "game.h"
 #include "result.h"
-#include "timelimit.h"
+#include "timeleft.h"
+#include "objects_move.h"
 
 // timelimit (msec)
-static const int cTimeLimit = 2 * 1000;
+static const int cTimeLimit = 1 * 1000;
 // Redisplay interval for TimeFunc (msec)
 static const int cRedisplayInterval = 50;
 
@@ -22,6 +23,7 @@ void main_displayFunc(void){
 // if GAMETIME passed, isTimeUp <- true, then ReDisplay
 void main_timeFunc(int passedTime){
 	declineTimeLeft(cRedisplayInterval);
+	objectsMove(passedTime);
 	glutPostRedisplay();
 	glutTimerFunc(cRedisplayInterval, main_timeFunc, passedTime + cRedisplayInterval);
 }

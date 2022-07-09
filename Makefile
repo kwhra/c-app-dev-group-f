@@ -2,21 +2,22 @@ GCC = gcc
 BUILDFLAG = -lglut -lGLU -lGL -lm
 DEPFLAG = 
 
-PROG = groupf
-PROGSRC = score.c result.c timeleft.c objects.c game.c game_client.c
-PROGOBJ = $(PROGSRC:%.c=%.o)
-PROGDEP = $(PROGSRC:%.c=%.d)
-
 MOVE = move
-MOVESRC = carrot.c diamond.c objects.c objects_draw.c objects_move.c
+MOVESRC = 
 MOVEOBJ = $(MOVESRC:%.c=%.o)
 MOVEDEP = $(MOVESRC:%.c=%.d)
+
+PROG = groupf
+PROGSRC = carrot.c diamond.c objects.c objects_draw.c objects_move.c\
+score.c result.c timeleft.c game.c game_client.c
+PROGOBJ = $(PROGSRC:%.c=%.o)
+PROGDEP = $(PROGSRC:%.c=%.d)
 
 PROGS = $(PROG) $(MOVE)
 OBJS = $(PROGOBJ) $(MOVEOBJ)
 DEPS = $(PROGDEP) $(MOVEDEP)
 
-$(PROG): $(PROGOBJ)
+$(PROG): $(PROGOBJ) 
 	$(GCC) -o $@ $(PROGOBJ) $(BUILDFLAG)
 
 $(MOVE): $(MOVEOBJ)

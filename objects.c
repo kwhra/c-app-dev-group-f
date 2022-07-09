@@ -3,20 +3,7 @@
 
 
 // OBJECT = {int type; GLboolean isVisible; GLdouble* location}
-static OBJECT sObjects[OBJECT_NUM];
-
-void initOBjects(){
-	// for i = 1 ~
-	// initialize 0
-	int i;
-	for (i = 0; i < OBJECT_NUM; i++){
-		sObjects[i].type = 0;
-		sObjects[i].isVisible = GL_FALSE;
-		sObjects[i].x = 0.0;
-		sObjects[i].y = 0.0;
-		sObjects[i].z = 0.0;
-	}
-}
+static OBJECT sObjects[OBJECT_NUM]={0};
 
 void setObjectType(int index, int type){
 	sObjects[index].type = type;

@@ -3,6 +3,7 @@
 #include <time.h>
 #include "game.h"
 #include "result.h"
+#include "objects_move.h"
 
 //program dialogue screan
 #define SCREAN_FOVY 100.0
@@ -12,8 +13,8 @@
 
 //camera
 #define CAMERA_EYEX 0.0
-#define CAMERA_EYEY 10.0
-#define CAMERA_EYEZ 10.0
+#define CAMERA_EYEY 5.0
+#define CAMERA_EYEZ 2.0
 #define CAMERA_CENTERX 0.0 
 #define CAMERA_CENTERY 0.0
 #define CAMERA_CENTERZ 0.0
@@ -32,6 +33,7 @@ void displayGame(){
 	//camera
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	//gluLookAt(0.0, 5.6, 8.2, 0.0, -10.0, 4.0, 0.0, 0.0, 1.0);
 	gluLookAt(CAMERA_EYEX, CAMERA_EYEY, CAMERA_EYEZ, CAMERA_CENTERX, CAMERA_CENTERY, CAMERA_CENTERZ, CAMERA_UPX, CAMERA_UPY, CAMERA_UPZ);
 
 	glEnable(GL_LIGHTING);
@@ -40,6 +42,6 @@ void displayGame(){
 	glEnable(GL_LIGHT2);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3d(0.0, 1.0, 0.0);
-	glutSolidSphere(3.0, 20, 20);
+	drawObjects();
 	glutSwapBuffers();
 }

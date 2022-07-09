@@ -16,12 +16,12 @@ static int sObjectCount = 0;
 // 10% diamond, 30% poison carrot, else carrot 
 static const double cDiamondRatio = 0;
 static const double cPCarrotRatio = 0.4;
-static const int starttime = 5;// time until draw first obj
+static const int starttime = 0;// time until draw first obj
 static const int interval = 10;// time until draw next obj
 
 static const double cVelocity = 1;// velocity
 
-void drawObjects (void)
+void drawObjects ()
 {
 	for(int i = 0; i < sObjectCount; i++)
 	{
@@ -33,15 +33,6 @@ void drawObjects (void)
 			glPopMatrix();
 		}
 	}
-}
-
-void display(void)
-{
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glPushMatrix();
-	drawObjects();
-	glPopMatrix();
-	glutSwapBuffers();
 }
 
 static void makeNewObject(int index){
@@ -63,9 +54,10 @@ static void makeNewObject(int index){
 	{
 		setObjectType(index, CARROT);
 	}
+	sObjectCount++;
 }
 
-static void moveObjects(int t){
+static void moveObjects(int passedTime){
 	// exceed 1 step
 	// if y>5, delete
 	for (int i = 0; i < sObjectCount; i++)
@@ -82,55 +74,14 @@ static void moveObjects(int t){
 	}
 }
 
-void objectsMove(int t)
+void objectsMove(int passedTime)
 {
-	if (t > 0)
+	if ((passedTime - starttime) % interval == 0)
 	{
-		if ((t - starttime) % interval == 0)
-		{
-			makeNewObject(sObjectCount);
-		}
-		moveObjects(t);
-		sObjectCount = (t - starttime) / interval + 1;
+		makeNewObject(sObjectCount);
 	}
-	glutTimerFunc(50, objectsMove, t + 1);
-}
-
-void idle()
-{
-	glutPostRedisplay();
-}
-
-void init()
-{
-	initOBjects();
-	glClearColor(1.0, 1.0, 1.0, 0.0);
-	glEnable(GL_DEPTH_TEST);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-
-	glutIdleFunc(idle);
-
-	glEnable(GL_LIGHTING);
-	glEnable(GL_LIGHT0);
-	glEnable(GL_LIGHT1);
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(30.0, 1, .1, 100.0);
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt(0.0, 5.6, 8.2, 0.0, -10.0, 4.0, 0.0, 0.0, 1.0);
-}
-
-int main(int argc, char* argv[])
-{
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-	glutCreateWindow("C Dev");
-	glutDisplayFunc(display);
-	glutTimerFunc(100, objectsMove, 0);
-	init();
-	glutMainLoop();
-	return 0;
+	moveObjects(passedTime);
+	if(sObjectCount == OBJECT_NUM){
+		sObjectCount = 0;
+	}
 }
