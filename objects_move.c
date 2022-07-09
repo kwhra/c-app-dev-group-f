@@ -82,7 +82,7 @@ static void moveObjects(int t){
 	}
 }
 
-void objectmove(int t)
+void objectsMove(int t)
 {
 	if (t > 0)
 	{
@@ -93,15 +93,15 @@ void objectmove(int t)
 		moveObjects(t);
 		sObjectCount = (t - starttime) / interval + 1;
 	}
-	glutTimerFunc(50, objectmove, t + 1);
+	glutTimerFunc(50, objectsMove, t + 1);
 }
 
-void idle(void)
+void idle()
 {
 	glutPostRedisplay();
 }
 
-void init(void)
+void init()
 {
 	initOBjects();
 	glClearColor(1.0, 1.0, 1.0, 0.0);
@@ -129,7 +129,7 @@ int main(int argc, char* argv[])
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutCreateWindow("C Dev");
 	glutDisplayFunc(display);
-	glutTimerFunc(100, objectmove, 0);
+	glutTimerFunc(100, objectsMove, 0);
 	init();
 	glutMainLoop();
 	return 0;

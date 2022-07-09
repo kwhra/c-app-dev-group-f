@@ -3,7 +3,7 @@ BUILDFLAG = -lglut -lGLU -lGL -lm
 DEPFLAG = 
 
 PROG = groupf
-PROGSRC = score.c result.c timelimit.c objects.c game.c game_client.c
+PROGSRC = score.c result.c timeleft.c objects.c game.c game_client.c
 PROGOBJ = $(PROGSRC:%.c=%.o)
 PROGDEP = $(PROGSRC:%.c=%.d)
 
