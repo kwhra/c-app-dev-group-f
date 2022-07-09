@@ -3,7 +3,7 @@
 
 
 // OBJECT = {int type; GLboolean isVisible; GLdouble* location}
-OBJECT sObjects[OBJECT_NUM];
+static OBJECT sObjects[OBJECT_NUM];
 
 void initOBjects(){
 	// for i = 1 ~

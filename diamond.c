@@ -148,6 +148,7 @@ void static ring() {
 
 void static diamondring() {
 	glPushMatrix();
+	glScaled(0.3, 0.3, 0.3);
 	glTranslated(0, 0, H_BOTTOM+R_OUTER);
 	diamond();
 	glTranslated(0, 0, -H_BOTTOM - R_OUTER);
@@ -163,19 +164,8 @@ void static init()
 	if (isInitialized){
 		// do nothing
 	}else{
+		isInitialized = GL_TRUE;
 		init_vertex();
-		glClearColor(1.0, 1.0, 1.0, 1.0);
-		glEnable(GL_DEPTH_TEST);
-		glEnable(GL_CULL_FACE);
-		glCullFace(GL_BACK);
-
-		glMatrixMode(GL_PROJECTION);
-		glLoadIdentity();
-		gluPerspective(30.0, 1, 1.0, 100.0);
-		glMatrixMode(GL_MODELVIEW);
-		glLoadIdentity();
-		gluLookAt(0.0, -40.0, 20.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0);
-
 		glLightfv(GL_LIGHT0, GL_POSITION, light_position);
 		glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, light_direction);
 		glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
