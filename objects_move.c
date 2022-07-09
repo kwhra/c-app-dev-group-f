@@ -5,13 +5,13 @@
 #include "objects_draw.h"
 
 // width of field
-int D = 10;
+static int D = 10;
 // height
-int H = 10;
+static int H = 10;
 // length
-int L = 15;
+static int L = 15;
 
-int sObjectCount = 0;
+static int sObjectCount = 0;
 
 // 10% diamond, 30% poison carrot, else carrot 
 static const double cDiamondRatio = 0;
@@ -19,7 +19,7 @@ static const double cPCarrotRatio = 0.4;
 static const int starttime = 5;// time until draw first obj
 static const int interval = 10;// time until draw next obj
 
-double cVelocity = 1;// velocity
+static const double cVelocity = 1;// velocity
 
 void drawObjects (void)
 {
