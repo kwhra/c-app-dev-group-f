@@ -19,8 +19,9 @@ static const double cPCarrotRatio = 0.4;
 static const int starttime = 5;// time until draw first obj
 static const int interval = 10;// time until draw next obj
 
+double cVelocity = 1;// velocity
 
-void drawobjects (void)
+void drawObjects (void)
 {
 	for(int i = 0; i < sObjectCount; i++)
 	{
@@ -38,16 +39,15 @@ void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glPushMatrix();
-	drawobjects();
+	drawObjects();
 	glPopMatrix();
 	glutSwapBuffers();
 }
 
-static void objectMake(int index){
+static void makeNewObject(int index){
 	srand((unsigned int)time(NULL));
 	setObjectLocation(index, rand() % D - 5, -1 * L, 0);
 	setObjectVisible(index, GL_TRUE);
-
 	//type
 	double r;
 	r = (float)rand() / RAND_MAX;
@@ -65,41 +65,35 @@ static void objectMake(int index){
 	}
 }
 
+static void moveObjects(int t){
+	// exceed 1 step
+	// if y>5, delete
+	for (int i = 0; i < sObjectCount; i++)
+	{
+		if (objectIsVisible(i))
+		{
+			GLdouble tempY = getObjectY(i);
+			setObjectY(i, tempY + cVelocity);
+			if (getObjectY(i) > 5)
+			{
+				setObjectVisible(i, GL_FALSE);
+			}				
+		}
+	}
+}
+
 void objectmove(int t)
 {
 	if (t > 0)
 	{
-		double v = 1;// velocity
-
 		if ((t - starttime) % interval == 0)
 		{
-			// decide obj type, and location
-			int index = (t - starttime) / interval;
-			objectMake(index);
+			makeNewObject(sObjectCount);
 		}
-
-		// exceed 1 step
-		// if y>5, delete
-		for (int i = 0; i < (t - starttime) / interval; i++)
-		{
-			if (objectIsVisible(i))
-			{
-				GLdouble tempY = getObjectY(i);
-				setObjectY(i, tempY + v);
-				if (getObjectY(i) > 5)
-				{
-					setObjectVisible(i, GL_FALSE);
-				}				
-			}
-			
-		}
-
+		moveObjects(t);
 		sObjectCount = (t - starttime) / interval + 1;
-
 	}
-
 	glutTimerFunc(50, objectmove, t + 1);
-
 }
 
 void idle(void)
@@ -135,7 +129,7 @@ int main(int argc, char* argv[])
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutCreateWindow("C Dev");
 	glutDisplayFunc(display);
-	objectmove(0);
+	glutTimerFunc(100, objectmove, 0);
 	init();
 	glutMainLoop();
 	return 0;
