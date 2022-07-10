@@ -1,11 +1,12 @@
 #include <GL/glut.h>
+#include <stdio.h>
 #include "game.h"
 #include "result.h"
 #include "timeleft.h"
 #include "objects_move.h"
 
 // timelimit (msec)
-static const int cTimeLimit = 1 * 1000;
+static const int cTimeLimit = 3 * 1000;
 // Redisplay interval for TimeFunc (msec)
 static const int cRedisplayInterval = 50;
 
@@ -34,13 +35,14 @@ void main_idleFunc(){
 }
 
 int main(int argc, char* argv[]){
-	setTimeLeft(cTimeLimit);
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutCreateWindow("Group F");
 	glutDisplayFunc(main_displayFunc);
+	initGame();
 	glutIdleFunc(main_idleFunc);
 	glutTimerFunc(cRedisplayInterval, main_timeFunc, 0);
+	setTimeLeft(cTimeLimit);
 	glutMainLoop();
 	return 0;
 }
