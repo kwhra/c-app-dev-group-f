@@ -9,7 +9,7 @@
 #define P_CARROT 2
 #define DIAMOND 3
 //total num
-#define OBJECT_NUM 10
+#define OBJECT_NUM 5
 typedef struct object{
 	// carrot, poison carrot, diamond
 	int type;

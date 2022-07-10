@@ -5,11 +5,9 @@
 #include "objects_draw.h"
 
 // width of field
-static int D = 10;
-// height
-static int H = 10;
+static int D = 5;
 // length
-static int L = 15;
+static int L = 25;
 
 static int sObjectCount = 0;
 
@@ -17,7 +15,8 @@ static int sObjectCount = 0;
 static const double cDiamondRatio = 0;
 static const double cPCarrotRatio = 0.4;
 static const int starttime = 0;// time until draw first obj
-static const int interval = 10;// time until draw next obj
+static const int cMakeInterval = 1000;// time until draw next obj
+static const int cMoveInterval = 100;
 
 static const double cVelocity = 1;// velocity
 
@@ -55,6 +54,9 @@ static void makeNewObject(int index){
 		setObjectType(index, CARROT);
 	}
 	sObjectCount++;
+	if(sObjectCount == OBJECT_NUM){
+		sObjectCount = 0;
+	}
 }
 
 static void moveObjects(int passedTime){
@@ -66,7 +68,7 @@ static void moveObjects(int passedTime){
 		{
 			GLdouble tempY = getObjectY(i);
 			setObjectY(i, tempY + cVelocity);
-			if (getObjectY(i) > 5)
+			if (getObjectY(i) > 1)
 			{
 				setObjectVisible(i, GL_FALSE);
 			}				
@@ -76,12 +78,12 @@ static void moveObjects(int passedTime){
 
 void objectsMove(int passedTime)
 {
-	if ((passedTime - starttime) % interval == 0)
+	if ((passedTime) % cMakeInterval == 0)
 	{
 		makeNewObject(sObjectCount);
 	}
-	moveObjects(passedTime);
-	if(sObjectCount == OBJECT_NUM){
-		sObjectCount = 0;
+	if ((passedTime) % cMoveInterval == 0)
+	{
+		moveObjects(passedTime);
 	}
 }

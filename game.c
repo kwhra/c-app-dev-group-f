@@ -34,11 +34,12 @@ void initGame(){
 	//game screan
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(SCREAN_FOVY, SCREAN_ASPECT, SCREAN_ZNEAR, SCREAN_ZFAR);
+	gluPerspective(30.0, 1, .1, 100.0);
+	//gluPerspective(SCREAN_FOVY, SCREAN_ASPECT, SCREAN_ZNEAR, SCREAN_ZFAR);
 	//camera
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0.0, 5.6, 8.2, 0.0, -10.0, 4.0, 0.0, 0.0, 1.0);
+	gluLookAt(0.0, 10.0, 4.0, 0.0, -10.0, 0.0, 0.0, 0.0, 1.0);
 	//gluLookAt(CAMERA_EYEX, CAMERA_EYEY, CAMERA_EYEZ, CAMERA_CENTERX, CAMERA_CENTERY, CAMERA_CENTERZ, CAMERA_UPX, CAMERA_UPY, CAMERA_UPZ);
 
 	glEnable(GL_LIGHTING);

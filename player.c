@@ -98,7 +98,6 @@ void display(void)/*ディスプレイの描画(合わせる際に多分消すもの)*/
   disPlayer();
   glPopMatrix();
 
-	glPopMatrix();
 	glutSwapBuffers();
 }
 

@@ -13,15 +13,14 @@ void printString(float x, float y, char* str, int length){
 void displayResult(void)
 {
 	int i,j;
-	glClear(GL_COLOR_BUFFER_BIT);
-
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	//game screan
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	//camera
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	
+	glPushMatrix();
 	int score = getScore();
 	glColor3d(1.0, 1.0, 1.0);
    char char_score= score + '0';
@@ -48,5 +47,6 @@ void displayResult(void)
 	   printString(1.03, 0.62 - 0.04 * i, "|", 1);
 
    }
+	 glPopMatrix();
 	glutSwapBuffers();
 }

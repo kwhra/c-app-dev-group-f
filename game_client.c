@@ -8,7 +8,7 @@
 // timelimit (msec)
 static const int cTimeLimit = 3 * 1000;
 // Redisplay interval for TimeFunc (msec)
-static const int cRedisplayInterval = 50;
+static const int cRedisplayInterval = 100;
 
 //func for glutDisplayFunc
 // if isTimeUp display Result, else display Gaming 
@@ -24,7 +24,9 @@ void main_displayFunc(void){
 // if GAMETIME passed, isTimeUp <- true, then ReDisplay
 void main_timeFunc(int passedTime){
 	declineTimeLeft(cRedisplayInterval);
-	objectsMove(passedTime);
+	if (isTimeUp() != GL_TRUE){
+		objectsMove(passedTime);
+	}
 	glutPostRedisplay();
 	glutTimerFunc(cRedisplayInterval, main_timeFunc, passedTime + cRedisplayInterval);
 }
