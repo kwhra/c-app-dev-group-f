@@ -1,7 +1,7 @@
 #include <GL/glut.h>
 #include "score.h"
 
-void printString(float x, float y, char* str, int length){
+static void printString(float x, float y, char* str, int length){
 	float z = -1.0f;
 	glRasterPos3f(x, y, z);
 	

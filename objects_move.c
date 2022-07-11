@@ -15,10 +15,9 @@ static int sObjectCount = 0;
 static const double cDiamondRatio = 0;
 static const double cPCarrotRatio = 0.4;
 static const int starttime = 0;// time until draw first obj
-static const int cMakeInterval = 1000;// time until draw next obj
-static const int cMoveInterval = 100;
+static const int cMakeInterval = 3000;// time until draw next obj
 
-static const double cVelocity = 1;// velocity
+static const double cVelocity = 3.0;// velocity
 
 void drawObjects ()
 {
@@ -36,7 +35,7 @@ void drawObjects ()
 
 static void makeNewObject(int index){
 	srand((unsigned int)time(NULL));
-	setObjectLocation(index, rand() % D - 5, -1 * L, 0);
+	setObjectLocation(index, rand() % D - 5, -1 * L, 1);
 	setObjectVisible(index, GL_TRUE);
 	//type
 	double r;
@@ -78,12 +77,9 @@ static void moveObjects(int passedTime){
 
 void objectsMove(int passedTime)
 {
-	if ((passedTime) % cMakeInterval == 0)
+	if (passedTime > cMakeInterval * sObjectCount)
 	{
 		makeNewObject(sObjectCount);
 	}
-	if ((passedTime) % cMoveInterval == 0)
-	{
-		moveObjects(passedTime);
-	}
+	moveObjects(passedTime);
 }

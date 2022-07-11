@@ -3,12 +3,13 @@
 #include "carrot.h"
 #include "diamond.h"
 
+static const GLdouble size = 0.5;
+
 void drawObject(int index){
 	if (objectIsVisible(index)){
+		glPushMatrix();
+		glScaled(size, size, size);
 		switch (getObjectType(index)){
-		case ME:
-			//drawMe();
-			break;
 		case CARROT:
 			drawCarrot();
 			break;
@@ -21,5 +22,6 @@ void drawObject(int index){
 		default:
 			break;
 		}
+		glPopMatrix();
 	}
 }

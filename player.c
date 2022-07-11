@@ -5,7 +5,7 @@
 #include "head.h"
 
 
-GLfloat color[][4] = {
+ GLfloat color[][4] = {
 		{ 1.0, 1.0, 1.0, 1.0 },//WHITE
 		{ 1.0, 0.0, 0.0, 1.0 },//RED
 		{ 0.0, 1.0, 0.0, 1.0 },// GREEN
@@ -28,17 +28,17 @@ GLfloat color[][4] = {
 
 //GLfloat pos1[] = { 0.0, 0.0, 5.0, 1.0 };//消した
 
-double L = 1;
-double small_player = 0.33;//プレイﾔｰの大きさを変更
-double player_w = 1.5;//プレイヤーの横幅初期値は1.5(元々のプレイヤーオブジェクトの幅)
+ double L = 1;
+ double small_player = 0.33;//プレイﾔｰの大きさを変更
+ double player_w = 1.5;//プレイヤーの横幅初期値は1.5(元々のプレイヤーオブジェクトの幅)
 
-double player_x = 0;//プレイヤーの座標x
-double player_y = 0;//プレイヤーの座標y
-double player_z = 0;//プレイヤーの座標z
-int mySpecialValue = 0;//プレイヤーの移動判定
+ double player_x = 0;//プレイヤーの座標x
+ double player_y = 0;//プレイヤーの座標y
+ double player_z = 0;//プレイヤーの座標z
+ int mySpecialValue = 0;//プレイヤーの移動判定
 int hit = 1;//hitしたかどうかのフラグ
 
-GLboolean isHit(int h){//isHit()のとりあえずの関数/確認用
+ GLboolean isHit(int h){//isHit()のとりあえずの関数/確認用
   if(hit == 0){
     return GL_TRUE;
   }else{
@@ -80,7 +80,7 @@ void idle(void)
   //printf("%d\n", hit);//hitが作動しているか確認するためのもの(実際のプログラムには不要)
 	glutPostRedisplay();
 }
-void display(void)/*ディスプレイの描画(合わせる際に多分消すもの)*/
+ void display(void)/*ディスプレイの描画(合わせる際に多分消すもの)*/
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
  
@@ -102,7 +102,7 @@ void display(void)/*ディスプレイの描画(合わせる際に多分消すもの)*/
 }
 
 /*円錐の描画*/
-void SCone(double up, double spin1,double spin2, double mx, double my, double mz){
+static void SCone(double up, double spin1,double spin2, double mx, double my, double mz){
   glPushMatrix();
   glTranslatef(mx*small_player,my*small_player,mz*small_player);
   glRotatef(spin1,1.0,0.0,0.0);//x軸中心に回転
@@ -113,7 +113,7 @@ void SCone(double up, double spin1,double spin2, double mx, double my, double mz
   
 }
 /*球の描画*/
-void Sphere(double upX, double upY, double upZ, double spin,double mx, double my, double mz){
+static void Sphere(double upX, double upY, double upZ, double spin,double mx, double my, double mz){
   glPushMatrix();
   glTranslatef(mx*small_player, my*small_player, mz*small_player);
   //glRotatef(spin, 1.0, 0.0, 0.0);
