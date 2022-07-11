@@ -7,7 +7,7 @@
 #include "player.h"
 
 // timelimit (msec)
-static const int cTimeLimit = 20 * 1000;
+static const int cTimeLimit = 5 * 1000;
 // Redisplay interval for TimeFunc (msec)
 static const int cRedisplayInterval = 100;
 
