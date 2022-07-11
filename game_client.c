@@ -7,9 +7,9 @@
 #include "player.h"
 
 // timelimit (msec)
-static const int cTimeLimit = 10 * 1000;
+static const int cTimeLimit = 20 * 1000;
 // Redisplay interval for TimeFunc (msec)
-static const int cRedisplayInterval = 200;
+static const int cRedisplayInterval = 100;
 
 //func for glutDisplayFunc
 // if isTimeUp display Result, else display Gaming 

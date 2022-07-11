@@ -17,7 +17,7 @@ static const double cPCarrotRatio = 0.4;
 static const int starttime = 0;// time until draw first obj
 static const int cMakeInterval = 3000;// time until draw next obj
 
-static const double cVelocity = 3.0;// velocity
+static const double cVelocity = 1.2;// velocity
 
 void drawObjects ()
 {
@@ -67,7 +67,7 @@ static void moveObjects(int passedTime){
 		{
 			GLdouble tempY = getObjectY(i);
 			setObjectY(i, tempY + cVelocity);
-			if (getObjectY(i) > 1)
+			if (getObjectY(i) > 0)
 			{
 				setObjectVisible(i, GL_FALSE);
 			}				

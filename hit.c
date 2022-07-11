@@ -26,7 +26,7 @@ GLdouble getObjectHitBox(int index){
 // let 0 is player
 // if hit with argument object, true
 GLboolean isHit(int index){
-	GLdouble playerLocation = getObjectX(ME);
+	GLdouble playerLocation = player_x;
 	GLdouble objectLocation = getObjectX(index);
 	GLdouble distance = fabs(playerLocation - objectLocation);
 	GLdouble playerHitBox = getObjectHitBox(ME);
@@ -39,7 +39,7 @@ GLboolean isHit(int index){
 	//  ---------- hit box
 	//   o<-->o                     =>  hit
 	
-	if (distance < hitReach) {
+	if (getObjectY(index)<=0 && distance < hitReach) {
 		return GL_TRUE;
 	}else{
 		return GL_FALSE;

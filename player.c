@@ -57,14 +57,14 @@ void idle(void)
 	}
 	if (mySpecialValue & (1 << 1))
 	{
-		player_x += 0.1;
-		if ((width/2.0 - player_w)*L < player_x - MARGIN)player_x -= 0.1;
+		player_x += 0.2;
+		if ((width/2.0 - player_w)*L < player_x - MARGIN)player_x -= 0.2;
 	}
 	if (mySpecialValue & (1 << 2))
 	{
 		
-   player_x -= 0.1;
-		if (-(width/2.0 -player_w) * L > player_x + MARGIN)player_x += 0.1;
+   player_x -= 0.2;
+		if (-(width/2.0 -player_w) * L > player_x + MARGIN)player_x += 0.2;
 	}
 	if (mySpecialValue & (1 << 3))//上下移動(使わない)
 	{
@@ -76,7 +76,6 @@ void idle(void)
   glLoadIdentity();
 	gluLookAt(10 + player_x, -10.0 + player_y, 5.0, 0.0 + player_x, 0.0 + player_y, 1.5, 0.0, 0.0, 1.0);
 */
-  actionHit();
   //printf("%d\n", hit);//hitが作動しているか確認するためのもの(実際のプログラムには不要)
 	glutPostRedisplay();
 }
