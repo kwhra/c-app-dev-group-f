@@ -32,18 +32,20 @@ void actionHit(){
   }
   for (int i = 0; i < sObjectCount; i++)
   {if(isHit(i)){
-   //printf("%d ga hani kennnai", i);
-  if( objectIsVisible(i)){//Hitしたときに立ち上がるフラグ。一定時間表示させたいので0~5の関数にしている。
-    //printf("%d wo kakutoku!!\n", i);
+  if( objectIsVisible(i)){
       switch (getObjectType(i))
 			{
 			case CARROT:
 				addScore(100);
+        // hit flag (to display message while "5" clock)
 				hit = 5;
 				break;
 			case P_CARROT:
 				addScore(-50);
         damage();
+      case DIAMOND: 
+        addScore(200);
+        hit = 5;
 			default:
 				break;
 			}

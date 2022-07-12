@@ -53,6 +53,7 @@ static void makeNewObject(int index){
 	r = (float)rand() / RAND_MAX;
 	if (r < cDiamondRatio)
 	{
+		setObjectVelocity(index, cVelocity * 2.5);
 		setObjectType(index, DIAMOND);
 	}
 	else if (r < cPCarrotRatio)

@@ -13,7 +13,7 @@ static int sTimeLimit = 60;
 static const int cRedisplayInterval = 50;
 
 //func for glutDisplayFunc
-// if isTimeUp display Result, else display Gaming 
+// if isTimeUp or gameup, then display Result, else display Gaming 
 void main_displayFunc(void){   
 	 if (isTimeUp() || gameOver() ){
      //printf("time up!!\n");
@@ -24,7 +24,7 @@ void main_displayFunc(void){
 }
 
 // func for TimeFunc
-// if GAMETIME passed, isTimeUp <- true, then ReDisplay
+// if GAMETIME passed, then isTimeUp <- true, else ReDisplay
 void main_timeFunc(int passedTime){
 	declineTimeLeft(cRedisplayInterval);
 	if (!(isTimeUp() || gameOver())){
