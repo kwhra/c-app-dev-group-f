@@ -8,10 +8,11 @@ extern GLfloat pos1[];//光源、消した
 
 //playerで定めた変数
 enum COLOR { WHITE, RED, GREEN, BLUE, YELLOW, MAGENTA, CYAN, GRAY, BLACK , PURPLE , BROWN, SKIN, LIGHTBLUE, GREENYELLOW, POWDERBLUE, FFFF33, FF6666, LEMONCHIFFON };//色(groundでも利用)
-extern double L;
+extern double M;
 extern double player_x;//プレイヤーの座標x
 extern double player_y;//プレイヤーの座標y
 extern double player_z;//プレイヤーの座標z
+extern double player_w;//プレイヤーの横幅(初期値は1.5)
 extern double small_player;//プレイヤーの大きさ
 extern int mySpecialValue;//プレイヤーの移動判定
 extern int hit;//hitしたかどうかのフラグ
@@ -31,7 +32,6 @@ extern int Flag;//背景の変更
 //playerの関数
 void drawPlayer();//プレイヤーの描画(大元)
 void disPlayer();//プレイヤーの描画(回転・入力による移動)
-GLboolean isHit(int h);//消す予定
 void myKeyboardFunc(unsigned char key, int x, int y);
 void mySpcialFunc(int key, int x, int y);
 void mySpcialUpFunc(int key, int x, int y);
@@ -44,6 +44,9 @@ void actionHit();//
 
 //Groundの関数
 void drawGround();
+
+//hitの関数
+GLboolean isHit(int index);//消す予定
 
 //他のプログラムでも利用するもの
 void display(void);

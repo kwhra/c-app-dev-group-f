@@ -18,7 +18,7 @@ MOVEOBJ = $(MOVESRC:%.c=%.o)
 MOVEDEP = $(MOVESRC:%.c=%.d)
 
 PROG = groupf
-PROGSRC = hit_action.c ground.c player.c\
+PROGSRC = hit.c hit_action.c ground.c player.c\
 carrot.c diamond.c objects.c objects_draw.c objects_move.c\
 score.c result.c timeleft.c game.c game_client.c
 PROGOBJ = $(PROGSRC:%.c=%.o)

@@ -5,6 +5,14 @@
 // OBJECT = {int type; GLboolean isVisible; GLdouble* location}
 static OBJECT sObjects[OBJECT_NUM]={{2}};
 
+void setObjectVelocity(int index, GLdouble v){
+	sObjects[index].velocity = v;
+}
+
+GLdouble getObjectVelocity(int index){
+	return sObjects[index].velocity;
+}
+
 void setObjectType(int index, int type){
 	sObjects[index].type = type;
 }

@@ -3,7 +3,7 @@
 #include <GL/glut.h>
 #include <math.h>
 #include "head.h"
-
+#include "score.h"
 
  GLfloat color[][4] = {
 		{ 1.0, 1.0, 1.0, 1.0 },//WHITE
@@ -28,7 +28,7 @@
 
 //GLfloat pos1[] = { 0.0, 0.0, 5.0, 1.0 };//消した
 
- double L = 1;
+ double M = 1;
  double small_player = 0.33;//プレイﾔｰの大きさを変更
  double player_w = 1.5;//プレイヤーの横幅初期値は1.5(元々のプレイヤーオブジェクトの幅)
 
@@ -38,13 +38,6 @@
  int mySpecialValue = 0;//プレイヤーの移動判定
 int hit = 1;//hitしたかどうかのフラグ
 
- GLboolean isHit(int h){//isHit()のとりあえずの関数/確認用
-  if(hit == 0){
-    return GL_TRUE;
-  }else{
-    return GL_FALSE;
-    }
-}
 void idle(void)
 {
 //左右移動に上限をつけるもの
@@ -58,13 +51,13 @@ void idle(void)
 	if (mySpecialValue & (1 << 1))
 	{
 		player_x += 0.2;
-		if ((width/2.0 - player_w)*L < player_x - MARGIN)player_x -= 0.2;
+		if ((width/2.0 - player_w)*M < player_x - MARGIN)player_x -= 0.2;
 	}
 	if (mySpecialValue & (1 << 2))
 	{
 		
    player_x -= 0.2;
-		if (-(width/2.0 -player_w) * L > player_x + MARGIN)player_x += 0.2;
+		if (-(width/2.0 -player_w) * M > player_x + MARGIN)player_x += 0.2;
 	}
 	if (mySpecialValue & (1 << 3))//上下移動(使わない)
 	{
@@ -76,7 +69,11 @@ void idle(void)
   glLoadIdentity();
 	gluLookAt(10 + player_x, -10.0 + player_y, 5.0, 0.0 + player_x, 0.0 + player_y, 1.5, 0.0, 0.0, 1.0);
 */
+  actionHit();
   //printf("%d\n", hit);//hitが作動しているか確認するためのもの(実際のプログラムには不要)
+  if(getScore() > 200){
+   Flag = 1;
+  }
 	glutPostRedisplay();
 }
  void display(void)/*ディスプレイの描画(合わせる際に多分消すもの)*/

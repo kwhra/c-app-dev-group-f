@@ -7,18 +7,19 @@
 #include "player.h"
 
 // timelimit (msec)
-static const int cTimeLimit = 5 * 1000;
+static int sTimeLimit = 60;
 // Redisplay interval for TimeFunc (msec)
-static const int cRedisplayInterval = 100;
+static const int cRedisplayInterval = 50;
 
 //func for glutDisplayFunc
 // if isTimeUp display Result, else display Gaming 
-void main_displayFunc(void){
-	if (isTimeUp()){
-		displayResult();
-	}else{
-		displayGame();
-	}
+void main_displayFunc(void){   
+	 if (isTimeUp()){
+     //printf("time up!!\n");
+	   displayResult();     
+	 }else{
+		 displayGame();
+   }
 }
 
 // func for TimeFunc
@@ -39,6 +40,8 @@ void main_idleFunc(){
 }
 
 int main(int argc, char* argv[]){
+	printf("input TimeLimit [sec]: ");
+	scanf("%d", &sTimeLimit);
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutCreateWindow("Group F");
@@ -46,7 +49,7 @@ int main(int argc, char* argv[]){
 	initGame();
 	glutIdleFunc(main_idleFunc);
 	glutTimerFunc(cRedisplayInterval, main_timeFunc, 0);
-	setTimeLeft(cTimeLimit);
+	setTimeLeft(sTimeLimit*1000);
 	glutMainLoop();
 	return 0;
 }

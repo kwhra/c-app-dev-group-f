@@ -9,7 +9,7 @@
 #define P_CARROT 2
 #define DIAMOND 3
 //total num
-#define OBJECT_NUM 5
+#define OBJECT_NUM 100
 typedef struct object{
 	// carrot, poison carrot, diamond
 	int type;
@@ -18,7 +18,10 @@ typedef struct object{
 	GLdouble x;
 	GLdouble y;
 	GLdouble z;
+	GLdouble velocity;
 } OBJECT;
+void setObjectVelocity(int index, GLdouble v);
+GLdouble getObjectVelocity(int index);
 void initOBjects();
 void setObjectType(int index, int type);
 int getObjectType(int index);

@@ -5,8 +5,8 @@
 #include <stdio.h>
 #include "result.h"
 
-#define GREAT 4 //良い結果の条件
-#define EXCELLENT 9 //とても良い結果の条件
+#define GREAT 99 //良い結果の条件
+#define EXCELLENT 299 //とても良い結果の条件
 #define CIRCLE_N 30 //2Dの〇の描画(正何角形を)
 #define FACE_N 100 //顔の線の描画
 #define PI2 (3.1415*2)//π*2
@@ -88,7 +88,7 @@ void displayResult(void)
 	int i,j, score_1digit;
   int score_digit = 0;
   
-	glClear(GL_COLOR_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//game screan
 	glMatrixMode(GL_PROJECTION);
@@ -98,6 +98,7 @@ void displayResult(void)
 	glLoadIdentity();
 	
 	int score = getScore();
+
 	glColor3d(1.0, 1.0, 1.0);
  
   printString(-0.8, 0.7, "Result",6);
@@ -110,7 +111,10 @@ void displayResult(void)
    }else{
      printString(-0.50 , -0.3, "GOOD JOB!!", 10);
    }
-   
+   if(score == 0){
+       //printf("a\n");//確認用
+       printString(0.3 , 0, "0", 1);//描画
+   }
    for(i = 1;;i++){   
      if(score != 0){
        score_1digit = score % 10;//スコアの最下位桁の数字を取り出す
