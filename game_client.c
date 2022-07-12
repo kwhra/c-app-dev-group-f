@@ -5,6 +5,7 @@
 #include "timeleft.h"
 #include "objects_move.h"
 #include "player.h"
+#include "score.h"
 
 // timelimit (msec)
 static int sTimeLimit = 60;
@@ -14,7 +15,7 @@ static const int cRedisplayInterval = 50;
 //func for glutDisplayFunc
 // if isTimeUp display Result, else display Gaming 
 void main_displayFunc(void){   
-	 if (isTimeUp()){
+	 if (isTimeUp() || gameOver() ){
      //printf("time up!!\n");
 	   displayResult();     
 	 }else{
@@ -26,7 +27,7 @@ void main_displayFunc(void){
 // if GAMETIME passed, isTimeUp <- true, then ReDisplay
 void main_timeFunc(int passedTime){
 	declineTimeLeft(cRedisplayInterval);
-	if (isTimeUp() != GL_TRUE){
+	if (!(isTimeUp() || gameOver())){
 		idle();
 		objectsMove(passedTime);
 	}

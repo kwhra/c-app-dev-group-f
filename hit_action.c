@@ -43,6 +43,7 @@ void actionHit(){
 				break;
 			case P_CARROT:
 				addScore(-50);
+        damage();
 			default:
 				break;
 			}
